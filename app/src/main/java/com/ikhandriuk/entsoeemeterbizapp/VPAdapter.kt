@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
-class VPAdapter(fm: FragmentManager, behavior: Int) : FragmentPagerAdapter(fm, behavior) {
+class VPAdapter(manager:FragmentManager):FragmentPagerAdapter(manager){
     override fun getCount(): Int {
-        TODO("Not yet  implemented")
+        TODO("Not yet implemented")
     }
 
     override fun getItem(position: Int): Fragment {
