@@ -9,6 +9,9 @@
         <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/fragment_month.xml" value="0.35104166666666664" />
         <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/fragment_second.xml" value="0.33697916666666666" />
         <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/fragment_third.xml" value="0.35" />
+        <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/fragment_today.xml" value="0.35104166666666664" />
+        <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/fragment_year.xml" value="0.35104166666666664" />
+        <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/fragment_yesterday.xml" value="0.35104166666666664" />
       </map>
     </option>
   </component>

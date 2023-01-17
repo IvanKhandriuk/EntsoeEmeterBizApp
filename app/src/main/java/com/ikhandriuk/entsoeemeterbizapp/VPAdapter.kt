@@ -5,11 +5,24 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 class VPAdapter(manager:FragmentManager):FragmentPagerAdapter(manager){
+
+    private val fragmentList: MutableList<Fragment> = ArrayList()
+    private val titleList: MutableList<String> = ArrayList()
+
     override fun getCount(): Int {
-        TODO("Not yet implemented")
+        return fragmentList.size
     }
 
     override fun getItem(position: Int): Fragment {
-        TODO("Not yet implemented")
+       return fragmentList[position]
+    }
+
+    fun addFragment(fragment: Fragment,title:String){
+        fragmentList.add(fragment)
+        titleList.add(title)
+    }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return titleList[position]
     }
 }
