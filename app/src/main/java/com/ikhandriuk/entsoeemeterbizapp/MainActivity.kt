@@ -3,6 +3,9 @@ package com.ikhandriuk.entsoeemeterbizapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 
@@ -18,5 +21,14 @@ class MainActivity : AppCompatActivity() {
 
        tabLayout=findViewById(R.id.tabLayout)
        viewPager=findViewById(R.id.viewPager)
+        tabLayout.setupWithViewPager(viewPager)
+
+        val adapter =VPAdapter(supportFragmentManager)
+        adapter.addFragment(FragmentToday(), title = "One")
+        adapter.addFragment(FragmentYesterday(), title = "Two")
+        adapter.addFragment(FragmentMonth(), title = "Three")
+        adapter.addFragment(FragmentYear(), title = "Four")
+        viewPager.adapter=adapter
     }
+
 }
