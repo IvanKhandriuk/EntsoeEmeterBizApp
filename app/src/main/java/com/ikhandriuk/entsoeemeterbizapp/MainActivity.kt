@@ -24,11 +24,14 @@ class MainActivity : AppCompatActivity() {
         tabLayout.setupWithViewPager(viewPager)
 
         val adapter =VPAdapter(supportFragmentManager)
-        adapter.addFragment(FragmentToday(), title = "One")
-        adapter.addFragment(FragmentYesterday(), title = "Two")
-        adapter.addFragment(FragmentMonth(), title = "Three")
-        adapter.addFragment(FragmentYear(), title = "Four")
+        adapter.addFragment(FragmentToday(), title= "Сьогодні")
+        adapter.addFragment(FragmentYesterday(), title = "Вчора")
+        adapter.addFragment(FragmentMonth(), title = "Січень")
+        adapter.addFragment(FragmentYear(), title = "2023")
         viewPager.adapter=adapter
+
+
+
     }
 
 }

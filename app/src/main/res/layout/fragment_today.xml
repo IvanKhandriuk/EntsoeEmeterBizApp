@@ -7,6 +7,8 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+
+
     <TextView
         android:id="@+id/text_today"
         android:layout_width="match_parent"
@@ -15,5 +17,7 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="30dp"/>
+
+
 
 </FrameLayout>
