@@ -14,7 +14,7 @@ class VPAdapter(manager:FragmentManager):FragmentPagerAdapter(manager){
     }
 
     override fun getItem(position: Int): Fragment {
-       return fragmentList[position]
+        return fragmentList[position]
     }
 
     fun addFragment(fragment: Fragment,title:String){

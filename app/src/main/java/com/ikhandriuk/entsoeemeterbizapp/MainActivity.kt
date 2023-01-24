@@ -3,9 +3,6 @@ package com.ikhandriuk.entsoeemeterbizapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 
@@ -19,8 +16,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       tabLayout=findViewById(R.id.tabLayout)
-       viewPager=findViewById(R.id.viewPager)
+        tabLayout=findViewById(R.id.tabLayout)
+        viewPager=findViewById(R.id.viewPager)
         tabLayout.setupWithViewPager(viewPager)
 
         val adapter =VPAdapter(supportFragmentManager)
@@ -29,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         adapter.addFragment(FragmentMonth(), title = "Січень")
         adapter.addFragment(FragmentYear(), title = "2023")
         viewPager.adapter=adapter
-
 
 
     }
