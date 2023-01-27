@@ -24,22 +24,7 @@ class FragmentToday : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
-//
-//            barList = ArrayList()
-//            barList.add(BarEntry(1f, 500f))
-//            barList.add(BarEntry(2f, 500f))
-//            barList.add(BarEntry(3f, 500f))
-//            barList.add(BarEntry(4f, 500f))
-//            barList.add(BarEntry(5f, 500f))
-//            barList.add(BarEntry(6f, 500f))
-//            barList.add(BarEntry(7f, 500f))
-//            barList.add(BarEntry(8f, 500f))
-//            barDataSet = BarDataSet(barList, "Population")
-//            barData = BarData(barDataSet)
-//            barChart.data=barData
-//            barDataSet.setColors(ColorTemplate.JOYFUL_COLORS,250)
-//            barDataSet.valueTextColor= Color.BLACK
-//            barDataSet.valueTextSize=15f
+
 
             return inflater.inflate(R.layout.fragment_today, container, false)
         }
