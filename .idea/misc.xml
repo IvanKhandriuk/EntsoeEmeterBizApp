@@ -3,7 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/activity_main.xml" value="0.35104166666666664" />
+        <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/drawable/ic_baseline_exit_to_start_screen.xml" value="0.1285" />
+        <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/fragment_first.xml" value="0.33697916666666666" />
         <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/fragment_forth.xml" value="0.35104166666666664" />
         <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/fragment_month.xml" value="0.35104166666666664" />
@@ -12,6 +13,8 @@
         <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/fragment_today.xml" value="0.35104166666666664" />
         <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/fragment_year.xml" value="0.35104166666666664" />
         <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/fragment_yesterday.xml" value="0.35104166666666664" />
+        <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/layout/list_item.xml" value="0.30416666666666664" />
+        <entry key="..\:/Projects/EntsoeEmeterBizApp/app/src/main/res/menu/menu.xml" value="0.21510416666666668" />
       </map>
     </option>
   </component>
