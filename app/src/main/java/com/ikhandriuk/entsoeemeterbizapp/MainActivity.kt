@@ -1,5 +1,6 @@
 package com.ikhandriuk.entsoeemeterbizapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -38,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     private val currentDate = date.format(calendar.time)
     private val nanoTime = calendar.timeInMillis.toString()
 
-    private lateinit var act: AutoCompleteTextView
     private lateinit var adapterItems: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,31 +68,44 @@ class MainActivity : AppCompatActivity() {
                 if (response.isSuccessful&&response.body()?.code.toString()!="0") {
                     Log.d("RsCode", response.body()?.code.toString())
                     Log.d("Response result", response.body()?.result.toString())
+                    val rsCode=response.body()?.code.toString()
                     intent.putExtra("RsCode",viewModel.myAuthResponse.value?.body()?.code.toString())
                 } else {
                     Log.d("Error", response.errorBody().toString())
                     Toast.makeText(this@MainActivity,"Wrong password or login",Toast.LENGTH_SHORT).show()
                 }
             })
+
         val authCode = intent.getStringExtra("RsCode").toString()
         getMyData(authCode, "1", "data", currentDate, "", nanoTime)
-        var items =intent.getStringExtra("StationNames").toString()
 
-        val str="A,B,C,D,E,F"
-        val listABC:List<String> = listOf(*str.split(",").toTypedArray())
+        var listOfStations = intent.getStringExtra("StationNames").toString()
+        Log.d("Names",listOfStations)
+
+        val stationsNames:String="Київська ГАЕС,Київська ГЕС,Канівська ГЕС," +
+                "Кременчуцька ГЕС,Середньодніпровська ГЕС,ДніпроГЕС-1,ДніпроГЕС-2," +
+                "Каховська ГЕС,Дністровська ГЕС,Дністровська ГАЕС,ПрАТ «Укргідроенерго»," +
+                "ПрАТ «Укргідроенерго» ГЕС,ПрАТ «Укргідроенерго» ГАЕС,Нижньодністровська ГЕС," +
+                "Краснооскільська ГЕС,Сумська ТЕЦ,Дарницька ТЕЦ,Черкаська ТЕЦ,Чернігівська ТЕЦ," +
+                "ТОВ ТЕПЛОЕНЕРГО ГРУП,Дніпровська ТЕЦ,Охтирська ТЕЦ,Білоцерківська ТЕЦ," +
+                "Орель-Лідер,Атлас Энерджи 1,Атлас Энерджи 2,Новопоселкова СЕС," +
+                "Новоолександрівська СЕС,Солар Квант 1,Солар Квант 2,Вільногірська СЕС," +
+                "Улянівська СЕС,РУФ СЕС,ТОВ ІМПЕРІАЛ ЕНЕРГО,ТОВ ІМПЕРІАЛ ЕНЕРГО 1 черга," +
+                "ТОВ ІМПЕРІАЛ ЕНЕРГО 2 черга,Водяне СЕС,Сирово СЕС,Олешківська СЕС," +
+                "Піщанка СЕС 1,Піщанка СЕС 2,НІКОПОЛЬ ЕЛІОС,БОЛГРАД ЕЛІОС,ПРОМЕТЕЙ ЕТГ," +
+                "ЧЕРВОНА ГОРА ЕКО ФЕС 1,ЧЕРВОНА ГОРА ЕКО ФЕС 2,ФЕС КИРЯКІВКА,ПП КАСМЕТ," +
+                "ЮСГ Виноградове,АСТЕРІЯ СОЛАР,ТАВАНЬ СОЛАР 3,ПРИМА СОЛАР ЕНЕРДЖІ,ТАВАНЬ СОЛАР 2," +
+                "ТАВАНЬ СОЛАР 1,НІКЕЛІОС,НЗФ,КП ДОР,Аульський водовід"
+        val listABC:List<String> = listOf(*stationsNames.split(",").toTypedArray())
 
         adapterItems=ArrayAdapter(this,R.layout.list_item,listABC)
 
         auto_complete_txt.setAdapter(adapterItems)
         auto_complete_txt.setOnItemClickListener { adapterView, view, i, l ->
-            var item:String=adapterView.getItemAtPosition(i).toString()
+            adapterView.getItemAtPosition(i).toString()
             Toast.makeText(applicationContext, "Item:", Toast.LENGTH_SHORT).show()
         }
-        
-
-
     }
-
     private fun getMyData(
         code: String,
         notlast: String,
@@ -107,7 +120,7 @@ class MainActivity : AppCompatActivity() {
             .build()
             .create(EmeterApi::class.java)
 
-        val retrofitData = retrofitBuilder.getData(code,  notlast, action, date, ids, time)
+        val retrofitData = retrofitBuilder.getData(code, notlast, action, date, ids, time)
 
         retrofitData.enqueue(object : Callback<ParametersItem?> {
             override fun onResponse(call: Call<ParametersItem?>, response: Response<ParametersItem?>) {
@@ -116,10 +129,10 @@ class MainActivity : AppCompatActivity() {
                     return
                 }
                 val responseBody = dataToNames(response.body()?.data).toString()
+                val intent = Intent(this@MainActivity,MainActivity::class.java)
                 intent.putExtra("StationNames",responseBody)
-                Log.d("CurrentBody", responseBody)
+                Log.d("Stations", responseBody)
                 return
-
             }
 
             override fun onFailure(call: Call<ParametersItem?>, t: Throwable) {

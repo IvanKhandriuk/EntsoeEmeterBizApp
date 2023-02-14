@@ -5,13 +5,174 @@
     android:layout_height="match_parent"
     tools:context=".FragmentToday">
 
-        <TextView
-            android:id="@+id/text_today"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="FirstFragment"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="30dp" />
+            android:orientation="vertical"
+            android:padding="9dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                        <com.github.mikephil.charting.charts.BarChart
+                            android:id="@+id/barChartToday"
+                            android:layout_width="match_parent"
+                            android:layout_height="450dp"
+                            android:layout_gravity="top"
+                            android:layout_marginTop="125dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="9dp"
+                    android:layout_marginTop="0dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="3dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Потужність"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    android:text="Відпуск"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    android:text="Прогноз"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Споживання"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginTop="4dp"
+                                    android:text="МВт"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginTop="4dp"
+                                    android:text="МВт"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginTop="4dp"
+                                    android:text="МВт"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginTop="4dp"
+                                    android:text="МВт"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="50dp"
+                            android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/powerTodayTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginTop="4dp"
+                                    android:text="111"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
+
+                                <TextView
+                                    android:id="@+id/releaseTodayTextVeiw"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginTop="4dp"
+                                    android:text="222"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:id="@+id/forecastTodayTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginTop="4dp"
+                                    android:text="333"
+                                    android:textColor="@color/black"
+                                    android:textSize="20dp" />
+
+                                <TextView
+                                    android:id="@+id/consumptionTodayTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_marginTop="4dp"
+                                    android:text="444"
+                                    android:textColor="@color/black"
+                                    android:textSize="20sp" />
+
+                        </LinearLayout>
+
+
+
+                </LinearLayout>
+
+        </LinearLayout>
 
 </FrameLayout>
