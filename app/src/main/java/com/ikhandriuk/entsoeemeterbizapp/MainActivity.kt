@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
@@ -37,13 +38,14 @@ class MainActivity : AppCompatActivity() {
     private val currentDate = date.format(calendar.time)
     private val nanoTime = calendar.timeInMillis.toString()
 
-    private lateinit var autoCompleteTxt:AutoCompleteTextView
+    private lateinit var act: AutoCompleteTextView
     private lateinit var adapterItems: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        viewPager=findViewById(R.id.viewPager)
         tabLayout=findViewById(R.id.tabLayout)
         tabLayout.setupWithViewPager(viewPager)
 
@@ -62,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             val myPassWord = "ivan1234"
             val encodePass: String = Base64.getEncoder().encodeToString(myPassWord.toByteArray())
             viewModel.setAuthorization(myLogIn, encodePass)
-            viewModel.myAuthResponse.observe(this, androidx.lifecycle.Observer{ response ->
+            viewModel.myAuthResponse.observe(this, Observer{ response ->
                 if (response.isSuccessful&&response.body()?.code.toString()!="0") {
                     Log.d("RsCode", response.body()?.code.toString())
                     Log.d("Response result", response.body()?.result.toString())
@@ -74,12 +76,21 @@ class MainActivity : AppCompatActivity() {
             })
         val authCode = intent.getStringExtra("RsCode").toString()
         getMyData(authCode, "1", "data", currentDate, "", nanoTime)
-
-
         var items =intent.getStringExtra("StationNames").toString()
 
-        autoCompleteTxt=auto_complete_txt
-        adapterItems=ArrayAdapter<String>(this,R.layout.list_item,items)
+        val str="A,B,C,D,E,F"
+        val listABC:List<String> = listOf(*str.split(",").toTypedArray())
+
+        adapterItems=ArrayAdapter(this,R.layout.list_item,listABC)
+
+        auto_complete_txt.setAdapter(adapterItems)
+        auto_complete_txt.setOnItemClickListener { adapterView, view, i, l ->
+            var item:String=adapterView.getItemAtPosition(i).toString()
+            Toast.makeText(applicationContext, "Item:", Toast.LENGTH_SHORT).show()
+        }
+        
+
+
     }
 
     private fun getMyData(
