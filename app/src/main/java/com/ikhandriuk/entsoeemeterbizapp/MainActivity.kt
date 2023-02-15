@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.VERBOSE
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.AdapterView
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.ikhandriuk.entsoeemeterbizapp.Api.EmeterApi
+import com.ikhandriuk.entsoeemeterbizapp.DataActivitys.LogInEnergyVision
 import com.ikhandriuk.entsoeemeterbizapp.Repository.Repository
 import com.ikhandriuk.entsoeemeterbizapp.Util.Constants.Companion.DATA_URL
 import com.ikhandriuk.multiplescreensapp.Model.Parameters.DataItem
@@ -41,6 +43,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var adapterItems: ArrayAdapter<String>
 
+   private lateinit var energyCode:LogInEnergyVision
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -60,27 +64,12 @@ class MainActivity : AppCompatActivity() {
         val viewModelFactory= MainViewModelFactory(repository)
         viewModel= ViewModelProvider(this,viewModelFactory)[MainViewModel::class.java]
 
-            val myLogIn = "ivan"
-            val myPassWord = "ivan1234"
-            val encodePass: String = Base64.getEncoder().encodeToString(myPassWord.toByteArray())
-            viewModel.setAuthorization(myLogIn, encodePass)
-            viewModel.myAuthResponse.observe(this, Observer{ response ->
-                if (response.isSuccessful&&response.body()?.code.toString()!="0") {
-                    Log.d("RsCode", response.body()?.code.toString())
-                    Log.d("Response result", response.body()?.result.toString())
-                    val rsCode=response.body()?.code.toString()
-                    intent.putExtra("RsCode",viewModel.myAuthResponse.value?.body()?.code.toString())
-                } else {
-                    Log.d("Error", response.errorBody().toString())
-                    Toast.makeText(this@MainActivity,"Wrong password or login",Toast.LENGTH_SHORT).show()
-                }
-            })
+        energyCode.authorization()
 
-        val authCode = intent.getStringExtra("RsCode").toString()
-        getMyData(authCode, "1", "data", currentDate, "", nanoTime)
 
-        var listOfStations = intent.getStringExtra("StationNames").toString()
-        Log.d("Names",listOfStations)
+        val authCode = intent.getStringExtra("AuthCode").toString()
+        Log.d("GET code",authCode)
+        //getMyData(authCode, "1", "data", currentDate, "", nanoTime)
 
         val stationsNames:String="Київська ГАЕС,Київська ГЕС,Канівська ГЕС," +
                 "Кременчуцька ГЕС,Середньодніпровська ГЕС,ДніпроГЕС-1,ДніпроГЕС-2," +
@@ -106,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "Item:", Toast.LENGTH_SHORT).show()
         }
     }
+
     private fun getMyData(
         code: String,
         notlast: String,
@@ -128,10 +118,8 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity,response.code().toString(),Toast.LENGTH_LONG).show()
                     return
                 }
-                val responseBody = dataToNames(response.body()?.data).toString()
-                val intent = Intent(this@MainActivity,MainActivity::class.java)
-                intent.putExtra("StationNames",responseBody)
-                Log.d("Stations", responseBody)
+                Log.d("StationNames", dataToNames(response.body()?.data).toString())
+                intent.putExtra("StationNames",response.body()?.data.toString())
                 return
             }
 
