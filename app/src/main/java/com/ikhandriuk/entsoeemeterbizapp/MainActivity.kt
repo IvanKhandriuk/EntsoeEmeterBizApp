@@ -1,25 +1,26 @@
 package com.ikhandriuk.entsoeemeterbizapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import com.google.gson.GsonBuilder
 import com.ikhandriuk.entsoeemeterbizapp.Api.EmeterApi
 import com.ikhandriuk.entsoeemeterbizapp.Repository.Repository
 import com.ikhandriuk.entsoeemeterbizapp.Util.Constants.Companion.DATA_URL
 import com.ikhandriuk.multiplescreensapp.Model.Parameters.DataItem
 import com.ikhandriuk.multiplescreensapp.Model.ParametersItem
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +28,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -114,6 +116,10 @@ class MainActivity : AppCompatActivity() {
         ids: String,
         time: String
     ) {
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
+
         val retrofitBuilder = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(DATA_URL)
