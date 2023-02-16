@@ -4,19 +4,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.util.Log.VERBOSE
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.ikhandriuk.entsoeemeterbizapp.Api.EmeterApi
-import com.ikhandriuk.entsoeemeterbizapp.DataActivitys.LogInEnergyVision
+import com.ikhandriuk.entsoeemeterbizapp.Screens.LogInEnergyVision
 import com.ikhandriuk.entsoeemeterbizapp.Repository.Repository
 import com.ikhandriuk.entsoeemeterbizapp.Util.Constants.Companion.DATA_URL
 import com.ikhandriuk.multiplescreensapp.Model.Parameters.DataItem
@@ -38,12 +35,8 @@ class MainActivity : AppCompatActivity() {
 
     private val date = SimpleDateFormat("yyyy-MM-dd")
     private val calendar = Calendar.getInstance()
-    private val currentDate = date.format(calendar.time)
-    private val nanoTime = calendar.timeInMillis.toString()
 
     private lateinit var adapterItems: ArrayAdapter<String>
-
-   private lateinit var energyCode:LogInEnergyVision
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,17 +53,6 @@ class MainActivity : AppCompatActivity() {
         adapter.addFragment(FragmentYear(), title = "2023")
         viewPager.adapter=adapter
 
-        val repository = Repository()
-        val viewModelFactory= MainViewModelFactory(repository)
-        viewModel= ViewModelProvider(this,viewModelFactory)[MainViewModel::class.java]
-
-        energyCode.authorization()
-
-
-        val authCode = intent.getStringExtra("AuthCode").toString()
-        Log.d("GET code",authCode)
-        //getMyData(authCode, "1", "data", currentDate, "", nanoTime)
-
         val stationsNames:String="Київська ГАЕС,Київська ГЕС,Канівська ГЕС," +
                 "Кременчуцька ГЕС,Середньодніпровська ГЕС,ДніпроГЕС-1,ДніпроГЕС-2," +
                 "Каховська ГЕС,Дністровська ГЕС,Дністровська ГАЕС,ПрАТ «Укргідроенерго»," +
@@ -85,8 +67,8 @@ class MainActivity : AppCompatActivity() {
                 "ЧЕРВОНА ГОРА ЕКО ФЕС 1,ЧЕРВОНА ГОРА ЕКО ФЕС 2,ФЕС КИРЯКІВКА,ПП КАСМЕТ," +
                 "ЮСГ Виноградове,АСТЕРІЯ СОЛАР,ТАВАНЬ СОЛАР 3,ПРИМА СОЛАР ЕНЕРДЖІ,ТАВАНЬ СОЛАР 2," +
                 "ТАВАНЬ СОЛАР 1,НІКЕЛІОС,НЗФ,КП ДОР,Аульський водовід"
-        val listABC:List<String> = listOf(*stationsNames.split(",").toTypedArray())
 
+        val listABC:List<String> = listOf(*stationsNames.split(",").toTypedArray())
         adapterItems=ArrayAdapter(this,R.layout.list_item,listABC)
 
         auto_complete_txt.setAdapter(adapterItems)
@@ -96,63 +78,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getMyData(
-        code: String,
-        notlast: String,
-        action: String,
-        date: String,
-        ids: String,
-        time: String
-    ) {
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(DATA_URL)
-            .build()
-            .create(EmeterApi::class.java)
-
-        val retrofitData = retrofitBuilder.getData(code, notlast, action, date, ids, time)
-
-        retrofitData.enqueue(object : Callback<ParametersItem?> {
-            override fun onResponse(call: Call<ParametersItem?>, response: Response<ParametersItem?>) {
-                if(!response.isSuccessful){
-                    Toast.makeText(this@MainActivity,response.code().toString(),Toast.LENGTH_LONG).show()
-                    return
-                }
-                Log.d("StationNames", dataToNames(response.body()?.data).toString())
-                intent.putExtra("StationNames",response.body()?.data.toString())
-                return
-            }
-
-            override fun onFailure(call: Call<ParametersItem?>, t: Throwable) {
-                Log.d("CurrentError", "onFailure: " + t.message)
-                Toast.makeText(this@MainActivity,t.message,Toast.LENGTH_LONG).show()
-            }
-        })
-    }
-
-    private fun dataToId(data: List<DataItem>?): List<Int> {
-        var result: MutableList<Int> = arrayListOf()
-        if (data != null)
-            for (i in data) {
-                result.add(i.id)
-            }
-        return result
-    }
-
-    private fun dataToNames(data: List<DataItem>?): List<String> {
-        var result: MutableList<String> = arrayListOf()
-        if (data != null)
-            for (i in data) {
-                result.add(i.name)
-            }
-        return result
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val authCode = intent.getStringExtra("RsCode").toString()
@@ -174,5 +103,4 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-
 }
