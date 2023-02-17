@@ -2,7 +2,7 @@ package com.ikhandriuk.entsoeemeterbizapp
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ikhandriuk.entsoeemeterbizapp.Repository.Repository
+import com.ikhandriuk.entsoeemeterbizapp.repository.Repository
 
 class MainViewModelFactory(
     private val repository: Repository

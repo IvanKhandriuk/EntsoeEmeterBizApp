@@ -1,8 +1,8 @@
-package com.ikhandriuk.entsoeemeterbizapp.Api
+package com.ikhandriuk.entsoeemeterbizapp.api
 
-import com.ikhandriuk.multiplescreensapp.Model.AuthorizationItem
-import com.ikhandriuk.multiplescreensapp.Model.LogOutItem
-import com.ikhandriuk.multiplescreensapp.Model.ParametersItem
+import com.ikhandriuk.entsoeemeterbizapp.model.AuthorizationItem
+import com.ikhandriuk.entsoeemeterbizapp.model.LogOutItem
+import com.ikhandriuk.entsoeemeterbizapp.model.ParametersItem
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET

@@ -22,7 +22,7 @@ class VPAdapter(manager:FragmentManager):FragmentPagerAdapter(manager){
         titleList.add(title)
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return titleList[position]
     }
 }

@@ -1,16 +1,9 @@
-package com.ikhandriuk.entsoeemeterbizapp.Api
+package com.ikhandriuk.entsoeemeterbizapp.api
 
-import com.ikhandriuk.entsoeemeterbizapp.Util.Constants
-import com.ikhandriuk.entsoeemeterbizapp.Util.Constants.Companion.BASE_URL
-import com.ikhandriuk.multiplescreensapp.Model.AuthorizationItem
-import com.ikhandriuk.multiplescreensapp.Model.LogOutItem
-import com.ikhandriuk.multiplescreensapp.Model.ParametersItem
-import retrofit2.Call
-import retrofit2.Response
+import com.ikhandriuk.entsoeemeterbizapp.util.Constants
+import com.ikhandriuk.entsoeemeterbizapp.util.Constants.Companion.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
 
 object RetrofitInstance {
     private val retrofit by lazy{

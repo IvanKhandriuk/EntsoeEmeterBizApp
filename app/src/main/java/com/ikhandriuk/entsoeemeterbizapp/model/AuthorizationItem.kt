@@ -1,4 +1,4 @@
-package com.ikhandriuk.multiplescreensapp.Model
+package com.ikhandriuk.entsoeemeterbizapp.model
 
 data class AuthorizationItem(
     val result:String = "",

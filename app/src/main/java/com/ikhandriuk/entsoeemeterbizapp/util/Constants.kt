@@ -1,4 +1,4 @@
-package com.ikhandriuk.entsoeemeterbizapp.Util
+package com.ikhandriuk.entsoeemeterbizapp.util
 
 class Constants {
     companion object{

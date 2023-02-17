@@ -3,10 +3,9 @@ package com.ikhandriuk.entsoeemeterbizapp
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ikhandriuk.entsoeemeterbizapp.Repository.Repository
-import com.ikhandriuk.multiplescreensapp.Model.AuthorizationItem
-import com.ikhandriuk.multiplescreensapp.Model.LogOutItem
-import com.ikhandriuk.multiplescreensapp.Model.ParametersItem
+import com.ikhandriuk.entsoeemeterbizapp.model.AuthorizationItem
+import com.ikhandriuk.entsoeemeterbizapp.model.LogOutItem
+import com.ikhandriuk.entsoeemeterbizapp.repository.Repository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -18,21 +17,6 @@ class MainViewModel(private val repository: Repository) : ViewModel() {
         viewModelScope.launch {
             val response = repository.setAuthorization(login, pass)
             myAuthResponse.value = response
-        }
-    }
-
-    val myDataResponse: MutableLiveData<Response<ParametersItem>> = MutableLiveData()
-    fun getDatta(
-        code: String,
-        notlast: String,
-        action: String,
-        date: String,
-        ids: String,
-        time: String
-    ) {
-        viewModelScope.launch {
-            val response = repository.getDatta(code, notlast, action, date, ids, time)
-            myDataResponse.value = response
         }
     }
 

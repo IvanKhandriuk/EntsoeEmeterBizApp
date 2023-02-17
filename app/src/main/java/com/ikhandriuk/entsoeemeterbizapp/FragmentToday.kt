@@ -3,9 +3,7 @@ package com.ikhandriuk.entsoeemeterbizapp
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
-import android.widget.*
 import androidx.fragment.app.Fragment
-import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
@@ -15,9 +13,9 @@ import java.util.*
 
 
 class FragmentToday : Fragment() {
-        lateinit var barList: ArrayList<BarEntry>
-        lateinit var barDataSet: BarDataSet
-        lateinit var barData: BarData
+        private lateinit var barList: ArrayList<BarEntry>
+        private lateinit var barDataSet: BarDataSet
+        private lateinit var barData: BarData
 
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,

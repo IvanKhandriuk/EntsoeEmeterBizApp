@@ -55,10 +55,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="@string/select"
+
         android:textColorHint="@color/black"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout">
         <AutoCompleteTextView
+            android:textSize="16dp"
             android:background="@color/dull1"
             android:id="@+id/auto_complete_txt"
             android:layout_width="match_parent"

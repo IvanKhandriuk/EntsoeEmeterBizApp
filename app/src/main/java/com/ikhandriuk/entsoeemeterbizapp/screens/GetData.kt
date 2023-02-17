@@ -1,4 +1,4 @@
-package com.ikhandriuk.entsoeemeterbizapp.Screens
+package com.ikhandriuk.entsoeemeterbizapp.screens
 
 import android.content.Intent
 import android.os.Build
@@ -7,11 +7,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.JsonArray
 import com.ikhandriuk.entsoeemeterbizapp.*
-import com.ikhandriuk.entsoeemeterbizapp.Api.EmeterApi
-import com.ikhandriuk.entsoeemeterbizapp.Util.Constants
-import com.ikhandriuk.multiplescreensapp.Model.Parameters.DataItem
-import com.ikhandriuk.multiplescreensapp.Model.ParametersItem
+import com.ikhandriuk.entsoeemeterbizapp.api.EmeterApi
+import com.ikhandriuk.entsoeemeterbizapp.model.parameters.DataItem
+import com.ikhandriuk.entsoeemeterbizapp.model.parameters.ParamItem
+import com.ikhandriuk.entsoeemeterbizapp.model.ParametersItem
+import com.ikhandriuk.entsoeemeterbizapp.util.Constants
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,6 +21,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class GetData : AppCompatActivity() {
 
@@ -30,7 +33,8 @@ class GetData : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
+
         val authCode = intent.getStringExtra("AuthCode").toString()
         getMyData(authCode, "1", "data", currentDate, "", nanoTime)
 
@@ -57,13 +61,19 @@ class GetData : AppCompatActivity() {
                     Toast.makeText(this@GetData,response.code().toString(), Toast.LENGTH_LONG).show()
                     return
                 }
-                Log.d("StationNames", dataToNames(response.body()?.data).toString())
                 Log.d("StationId",dataToId(response.body()?.data).toString())
                 val namesOfStations:String = dataToNames(response.body()?.data).toString()
                 val idOfStations: String = dataToId(response.body()?.data).toString()
+                val paramOfStations: String = dataToParam(response.body()?.data).toString()
+                Log.d("StationsParam",paramOfStations)
+                //val ddataOfParam: List<ParamItem> = dataToDData()
+
                 val intent= Intent(this@GetData,MainActivity::class.java)
+                val authCode = intent.getStringExtra("AuthCode").toString()
+                intent.putExtra("AuthCode",authCode)
                 intent.putExtra("StationNames",namesOfStations)
                 intent.putExtra("StationId",idOfStations)
+                //intent.putExtra("StationParam",paramOfStations)
                 finish()
                 startActivity(intent)
                 return
@@ -93,4 +103,23 @@ class GetData : AppCompatActivity() {
             }
         return result
     }
+
+    private fun dataToParam(data: List<DataItem>?): List<ArrayList<ParamItem>> {
+        var result: MutableList<ArrayList<ParamItem>> = arrayListOf()
+        if (data != null)
+            for (i in data) {
+                result.add(i.param!!)
+            }
+        return result
+    }
+
+//    private fun dataToDData(data: List<ParamItem>?): List<ArrayList<JsonArray>> {
+//        var result: MutableList<ArrayList<JsonArray>> = arrayListOf()
+//        if (data != null)
+//            for (i in data) {
+//                result.add(i.ddata!!)
+//            }
+//        return result
+//    }
+
 }

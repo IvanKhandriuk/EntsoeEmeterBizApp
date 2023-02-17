@@ -10,16 +10,15 @@ import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.utils.ColorTemplate
-import kotlinx.android.synthetic.main.fragment_today.*
 import kotlinx.android.synthetic.main.fragment_yesterday.*
 import java.util.ArrayList
 
 
 class FragmentYesterday : Fragment() {
 
-    lateinit var barList: ArrayList<BarEntry>
-    lateinit var barDataSet: BarDataSet
-    lateinit var barData: BarData
+    private lateinit var barList: ArrayList<BarEntry>
+    private lateinit var barDataSet: BarDataSet
+    private lateinit var barData: BarData
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
