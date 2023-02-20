@@ -25,16 +25,8 @@ interface EmeterApi {
         @Query("action") action: String,
         @Query("date") date: String,
         @Query("ids") ids: String,
+        @Query("ids") fast: Boolean,
         @Query("time") time: String,
     ): Call<ParametersItem>
 
-    @GET("deviation.asdlf?")
-    fun getDatta(
-        @Query("code") code: String,
-        @Query("notlast") notlast: String,
-        @Query("action") action: String,
-        @Query("date") date: String,
-        @Query("ids") ids: String,
-        @Query("time") time: String,
-    ): Response<ParametersItem>
 }

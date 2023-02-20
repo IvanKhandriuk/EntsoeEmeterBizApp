@@ -7,7 +7,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.google.gson.JsonArray
 import com.ikhandriuk.entsoeemeterbizapp.*
 import com.ikhandriuk.entsoeemeterbizapp.api.EmeterApi
 import com.ikhandriuk.entsoeemeterbizapp.model.parameters.DataItem
@@ -36,7 +35,7 @@ class GetData : AppCompatActivity() {
         supportActionBar?.hide()
 
         val authCode = intent.getStringExtra("AuthCode").toString()
-        getMyData(authCode, "1", "data", currentDate, "", nanoTime)
+        getMyData(authCode, "1", "data", currentDate, "41",true, nanoTime)
 
     }
     private fun getMyData(
@@ -45,6 +44,7 @@ class GetData : AppCompatActivity() {
         action: String,
         date: String,
         ids: String,
+        fast:Boolean,
         time: String
     ) {
         val retrofitBuilder = Retrofit.Builder()
@@ -53,7 +53,7 @@ class GetData : AppCompatActivity() {
             .build()
             .create(EmeterApi::class.java)
 
-        val retrofitData = retrofitBuilder.getData(code, notlast, action, date, ids, time)
+        val retrofitData = retrofitBuilder.getData(code, notlast, action, date, ids,fast, time)
 
         retrofitData.enqueue(object : Callback<ParametersItem?> {
             override fun onResponse(call: Call<ParametersItem?>, response: Response<ParametersItem?>) {
@@ -112,6 +112,14 @@ class GetData : AppCompatActivity() {
             }
         return result
     }
+//    private fun paramToType(data: ArrayList<ParamItem>?): ArrayList<ParamItem> {
+//        var result: MutableList<ArrayList<ParamItem>> = arrayListOf()
+//        if (data != null)
+//            for (i in data) {
+//                result.add(i.type)
+//            }
+//        return result
+//    }
 
 //    private fun dataToDData(data: List<ParamItem>?): List<ArrayList<JsonArray>> {
 //        var result: MutableList<ArrayList<JsonArray>> = arrayListOf()

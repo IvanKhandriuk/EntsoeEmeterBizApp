@@ -17,14 +17,4 @@ object RetrofitInstance {
         retrofit.create(EmeterApi::class.java)
     }
 
-    private val retrofitData by lazy{
-        Retrofit.Builder()
-            .baseUrl(Constants.DATA_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-
-    val APIData: EmeterApi by lazy{
-        retrofitData.create(EmeterApi::class.java)
-    }
 }
