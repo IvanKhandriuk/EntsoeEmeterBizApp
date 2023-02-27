@@ -3,6 +3,7 @@ package com.ikhandriuk.entsoeemeterbizapp.screens
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -10,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.ikhandriuk.entsoeemeterbizapp.MainViewModel
 import com.ikhandriuk.entsoeemeterbizapp.MainViewModelFactory
+import com.ikhandriuk.entsoeemeterbizapp.R
 import com.ikhandriuk.entsoeemeterbizapp.repository.Repository
+import kotlinx.coroutines.delay
 import java.util.*
 
 class LogInEnergyVision: AppCompatActivity() {
@@ -19,7 +22,11 @@ class LogInEnergyVision: AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.splash_activity)
         supportActionBar?.hide()
+
+        Handler().postDelayed({
+            val intent = Intent(this@LogInEnergyVision, GetData::class.java)
 
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
@@ -37,7 +44,7 @@ class LogInEnergyVision: AppCompatActivity() {
                 val authCode = response.body()?.code.toString()
                 Log.d("AuthCode", "code is $authCode")
                 Log.d("Response result", response.body()?.result.toString())
-                val intent = Intent(this@LogInEnergyVision, GetData::class.java)
+
                 intent.putExtra("AuthCode", authCode)
                 finish()
                 startActivity(intent)
@@ -50,5 +57,6 @@ class LogInEnergyVision: AppCompatActivity() {
                 ).show()
             }
         }
+        }, 1000)
     }
 }
