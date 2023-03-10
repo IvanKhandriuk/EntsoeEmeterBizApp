@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         val adapter =VPAdapter(supportFragmentManager)
         adapter.addFragment(FragmentToday(), title= "Сьогодні")
         adapter.addFragment(FragmentYesterday(), title = "Вчора")
-        adapter.addFragment(FragmentMonth(), title = "Лютий")
+        adapter.addFragment(FragmentMonth(), title = "Березень")
         adapter.addFragment(FragmentYear(), title = "2023")
         viewPager.adapter=adapter
 

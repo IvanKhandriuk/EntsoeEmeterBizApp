@@ -47,7 +47,7 @@ class GetData : AppCompatActivity() {
                 .create(EmeterApi::class.java)
 
             val retrofitData =
-                retrofitBuilder.getData(authCode, "1", "data", currentDate, "41", true, nanoTime)
+                retrofitBuilder.getData(authCode, "1", "data", currentDate, "", true, nanoTime)
 
             retrofitData.enqueue(object : Callback<ParametersItem?> {
                 override fun onResponse(
@@ -118,22 +118,14 @@ class GetData : AppCompatActivity() {
         )
         val serialized = Gson().toJson(data)
     }
-//    private fun paramToType(data: ArrayList<ParamItem>?): ArrayList<ParamItem> {
-//        var result: MutableList<ArrayList<ParamItem>> = arrayListOf()
-//        if (data != null)
-//            for (i in data) {
-//                result.add(i.type)
-//            }
-//        return result
-//    }
 
-//    private fun dataToDData(data: List<ParamItem>?): List<ArrayList<JsonArray>> {
-//        var result: MutableList<ArrayList<JsonArray>> = arrayListOf()
-//        if (data != null)
-//            for (i in data) {
-//                result.add(i.ddata!!)
-//            }
-//        return result
-//    }
+    private fun dataToDData(data: List<ParamItem>?): List<ArrayList<JsonArray>> {
+        var result: MutableList<ArrayList<JsonArray>> = arrayListOf()
+        if (data != null)
+            for (i in data) {
+                result.add(i.ddata!!)
+            }
+        return result
+    }
 
 }
